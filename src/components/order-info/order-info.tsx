@@ -8,7 +8,7 @@ import { getOrderByNumberThunk } from '../../services/feeds/feedsAction';
 import { orderSelector } from '../../services/feeds/feedsSlice';
 import { ingredientsSelector } from '../../services/ingredients/ingredientsSlice';
 
-export const OrderInfo: FC = () => {
+export const OrderInfo: FC<{ title?: string }> = ({ title }) => {
   const dispatch = useDispatch();
   const { number } = useParams();
 
@@ -63,5 +63,5 @@ export const OrderInfo: FC = () => {
     return <Preloader />;
   }
 
-  return <OrderInfoUI orderInfo={orderInfo} />;
+  return <OrderInfoUI orderInfo={orderInfo} title={title} />;
 };
