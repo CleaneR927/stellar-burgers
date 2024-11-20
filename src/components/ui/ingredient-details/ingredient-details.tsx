@@ -1,14 +1,20 @@
 import React, { FC, memo } from 'react';
 import styles from './ingredient-details.module.css';
 import { IngredientDetailsUIProps } from './type';
+import clsx from 'clsx';
 
 export const IngredientDetailsUI: FC<IngredientDetailsUIProps> = memo(
-  ({ ingredientData }) => {
+  ({ ingredientData, title }) => {
     const { name, image_large, calories, proteins, fat, carbohydrates } =
       ingredientData;
 
     return (
       <div className={styles.content}>
+        <div className={styles.out_modal_title}>
+          <h2 className={clsx(styles.title, 'text text_type_main-large')}>
+            {title}
+          </h2>
+        </div>
         <img
           className={styles.img}
           alt='изображение ингредиента.'

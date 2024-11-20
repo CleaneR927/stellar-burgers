@@ -8,7 +8,7 @@ import { getOrderByNumberThunk } from '../../services/feeds/feedsAction';
 import { orderSelector } from '../../services/feeds/feedsSlice';
 import { ingredientsSelector } from '../../services/ingredients/ingredientsSlice';
 
-export const OrderInfo: FC = () => {
+export const OrderInfo: FC<{ title?: string }> = ({ title }) => {
   const dispatch = useDispatch();
   const { number } = useParams();
 
@@ -59,9 +59,19 @@ export const OrderInfo: FC = () => {
     };
   }, [orderData, ingredients]);
 
+  useEffect(() => {
+    if (orderInfo && ingredients.length) {
+      document.title = `Заказ ${orderInfo.number} - ${Object.values(
+        orderInfo.ingredientsInfo
+      )
+        .map((ing) => ing.name)
+        .join(', ')}`;
+    }
+  }, [orderInfo, ingredients]);
+
   if (!orderInfo) {
     return <Preloader />;
   }
 
-  return <OrderInfoUI orderInfo={orderInfo} />;
+  return <OrderInfoUI orderInfo={orderInfo} title={title} />;
 };

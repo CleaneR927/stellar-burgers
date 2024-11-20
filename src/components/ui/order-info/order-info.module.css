@@ -74,3 +74,8 @@
 .total {
   margin-left: auto;
 }
+
+.out_modal_title {
+  align-self: start;
+  margin-bottom: 30px;
+}

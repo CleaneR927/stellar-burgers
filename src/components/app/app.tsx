@@ -38,7 +38,14 @@ const App = () => {
       <Routes location={backgroundLocation}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
-        <Route path='/feed/:number' element={<OrderInfo />} />
+        <Route
+          path='/feed/:number'
+          element={
+            <OrderInfo
+              title={backgroundLocation ? undefined : 'Информация о заказе'}
+            />
+          }
+        />
         <Route
           path='/login'
           element={
@@ -91,11 +98,20 @@ const App = () => {
           path='/profile/orders/:number'
           element={
             <ProtectedRoute>
-              <OrderInfo />
+              <OrderInfo
+                title={backgroundLocation ? undefined : 'Информация о заказе'}
+              />
             </ProtectedRoute>
           }
         />
-        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        <Route
+          path='/ingredients/:id'
+          element={
+            <IngredientDetails
+              title={backgroundLocation ? undefined : 'Детали ингредиента'}
+            />
+          }
+        />
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       {backgroundLocation && (
