@@ -59,6 +59,16 @@ export const OrderInfo: FC<{ title?: string }> = ({ title }) => {
     };
   }, [orderData, ingredients]);
 
+  useEffect(() => {
+    if (orderInfo && ingredients.length) {
+      document.title = `Заказ ${orderInfo.number} - ${Object.values(
+        orderInfo.ingredientsInfo
+      )
+        .map((ing) => ing.name)
+        .join(', ')}`;
+    }
+  }, [orderInfo, ingredients]);
+
   if (!orderInfo) {
     return <Preloader />;
   }
