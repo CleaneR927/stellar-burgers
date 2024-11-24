@@ -62,7 +62,10 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
             <ProfileIcon
               type={currentLocation === '/profile' ? 'primary' : 'secondary'}
             />
-            <p className='text text_type_main-default ml-2'>
+            <p
+              className='text text_type_main-default ml-2'
+              data-test='profile-autorization'
+            >
               {userName || 'Личный кабинет'}
             </p>
           </NavLink>
