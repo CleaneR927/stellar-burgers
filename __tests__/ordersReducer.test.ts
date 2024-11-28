@@ -43,7 +43,7 @@ describe('Проверка работы "orderReducer"', () => {
   describe('Тест вызова "orderBurgerThunk"', () => {
     test('Тест вызова "orderBurgerThunk" с состоянием "pending"', () => {
       const action = { type: orderBurgerThunk.pending.type };
-      const state = orderReducer(initialState, action);
+      const state = orderReducer({...initialState}, action);
       expect(state.isOrderLoading).toBeTruthy();
     });
 
@@ -52,7 +52,7 @@ describe('Проверка работы "orderReducer"', () => {
         type: orderBurgerThunk.rejected.type,
         error: { message: 'error fetching order' }
       };
-      const state = orderReducer(initialState, action);
+      const state = orderReducer({...initialState}, action);
       expect(state.isOrderLoading).toBeFalsy();
       expect(state.error).toBe(action.error.message);
     });
@@ -62,7 +62,7 @@ describe('Проверка работы "orderReducer"', () => {
         type: orderBurgerThunk.fulfilled.type,
         payload: { order: orderMockData }
       };
-      const state = orderReducer(initialState, action);
+      const state = orderReducer({...initialState}, action);
       expect(state.isOrderLoading).toBeFalsy();
       expect(state.order).toEqual(action.payload.order);
     });

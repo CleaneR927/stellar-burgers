@@ -24,7 +24,7 @@ describe('Проверка работы "feedsReducer"', () => {
   describe('Тест вызова "getFeedsThunk"', () => {
     test('Тест вызова "getFeedsThunk" с состоянием "pending"', () => {
       const action = { type: getFeedsThunk.pending.type }; // type определяет тип действия
-      const state = feedsReducer(initialState, action);
+      const state = feedsReducer({...initialState}, action);
       expect(state.isFeedsLoading).toBeTruthy();
     });
   
@@ -33,7 +33,7 @@ describe('Проверка работы "feedsReducer"', () => {
         type: getFeedsThunk.rejected.type,
         error: { message: 'error fetching feeds' } // error помогает обработать ошибки, возникшие во время выполнения действия
        };
-      const state = feedsReducer(initialState, action);
+      const state = feedsReducer({...initialState}, action);
       expect(state.isFeedsLoading).toBeFalsy();
       expect(state.error).toBe(action.error.message);
     });
@@ -47,7 +47,7 @@ describe('Проверка работы "feedsReducer"', () => {
           totalToday: 2 
         } 
       };
-      const state = feedsReducer(initialState, action);
+      const state = feedsReducer({...initialState}, action);
       expect(state.isFeedsLoading).toBeFalsy();
       expect(state.orders).toEqual(action.payload.orders);
       expect(state.total).toEqual(action.payload.total);
@@ -57,7 +57,7 @@ describe('Проверка работы "feedsReducer"', () => {
   describe('Тест вызова "getOrderByNumberThunk"', () => {
     test('Тест вызова "getOrderByNumberThunk" с состоянием "pending"', () => {
       const action = { type: getOrderByNumberThunk.pending.type };
-      const state = feedsReducer(initialState, action);
+      const state = feedsReducer({...initialState}, action);
       expect(state.isOrderLoading).toBeTruthy();
     })
     test('Тест вызова "getOrderByNumberThunk" с состоянием "rejected"', () => {
@@ -65,7 +65,7 @@ describe('Проверка работы "feedsReducer"', () => {
         type: getOrderByNumberThunk.rejected.type,
         error: { message: 'error fetching order' }
       };
-      const state = feedsReducer(initialState, action);
+      const state = feedsReducer({...initialState}, action);
       expect(state.isOrderLoading).toBeFalsy();
       expect(state.error).toBe(action.error.message);
     })
@@ -74,7 +74,7 @@ describe('Проверка работы "feedsReducer"', () => {
         type: getOrderByNumberThunk.fulfilled.type,
         payload: { orders: [{ id: 1, name: 'testItem' }, { id: 2, name: 'testItem2' }] }
       }
-      const state = feedsReducer(initialState, action);
+      const state = feedsReducer({...initialState}, action);
       expect(state.isOrderLoading).toBeFalsy();
       expect(state.order).toEqual(action.payload.orders[0]);
     })

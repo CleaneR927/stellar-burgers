@@ -18,7 +18,7 @@ describe('Проверка работы "ingredientsReducer"', () => {
 
   test('Тест вызова "getIngredientsThunk" с состоянием "pending"', () => {
     const action = { type: getIngredientsThunk.pending.type };
-    const state = ingredientsReducer( initialState, action );
+    const state = ingredientsReducer({...initialState}, action );
     expect(state.isIngredientsLoading).toBeTruthy();
   });
 
@@ -27,7 +27,7 @@ describe('Проверка работы "ingredientsReducer"', () => {
       type: getIngredientsThunk.rejected.type,
       error: { message: 'error fetching ingredients' }
     };
-    const state = ingredientsReducer( initialState, action );
+    const state = ingredientsReducer({...initialState}, action );
     expect(state.isIngredientsLoading).toBe(false);
     expect(state.error).toBe(action.error.message);
   });
@@ -40,7 +40,7 @@ describe('Проверка работы "ingredientsReducer"', () => {
         { id: 2, name: 'testIngredient2'}
       ]
     };
-    const state = ingredientsReducer( initialState, action );
+    const state = ingredientsReducer({...initialState}, action );
     expect(state.isIngredientsLoading).toBeFalsy();
     expect(state.ingredients).toEqual(action.payload);
   });

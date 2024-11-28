@@ -56,7 +56,7 @@ const ingredientsMockData = [
 
     describe('Работа с ингредиентами', () => {
       test('Добавление булки в конструктор методом "addIngredient"', () => {
-        const state = burgerConstructorReducer(initialState, addIngredient(ingredientsMockData[0]));
+        const state = burgerConstructorReducer({...initialState}, addIngredient(ingredientsMockData[0]));
         const updateState = {...state.burgerConstructor.bun };
         delete updateState.id;
         expect(updateState).toEqual(ingredientsMockData[0]);
@@ -64,7 +64,7 @@ const ingredientsMockData = [
       });
 
       test('Добавление основного ингредиента в конструктор методом "addIngredient"', () => {
-        const state = burgerConstructorReducer(initialState, addIngredient(ingredientsMockData[1]));
+        const state = burgerConstructorReducer({...initialState}, addIngredient(ingredientsMockData[1]));
         const updateState = {...state.burgerConstructor.ingredients[0]};
         delete updateState.id;
         expect(updateState).toEqual(ingredientsMockData[1]);

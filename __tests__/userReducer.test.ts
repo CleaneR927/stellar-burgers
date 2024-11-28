@@ -63,7 +63,7 @@ describe('Проверка работы "userReducer"', () => {
     describe('Тест вызова "loginUserThunk"', () => {
       test('Тест вызова "loginUserThunk" с состоянием "pending"', () => {
         const action = { type: loginUserThunk.pending.type };
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.loginUserRequest).toBeTruthy();
         expect(state.error).toBeNull();
       });
@@ -73,7 +73,7 @@ describe('Проверка работы "userReducer"', () => {
           type: loginUserThunk.rejected.type,
           error: { message: 'error login user' }
         };
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.loginUserRequest).toBeFalsy();
         expect(state.error).toBe(action.error.message);
       });
@@ -83,7 +83,7 @@ describe('Проверка работы "userReducer"', () => {
           type: loginUserThunk.fulfilled.type,
           payload: { user: loginMockData }
         }
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.isAuthenticated).toBeTruthy();
         expect(state.user).toEqual(action.payload);
         expect(state.loginUserRequest).toBeFalsy();
@@ -94,7 +94,7 @@ describe('Проверка работы "userReducer"', () => {
     describe('Тест вызова "registerUserThunk"', () => {
       test('Тест вызова "registerUserThunk" с состоянием "pending"', () => {
         const action = { type: registerUserThunk.pending.type };
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.isAuthenticated).toBeFalsy();
         expect(state.loginUserRequest).toBeTruthy();
       });
@@ -104,7 +104,7 @@ describe('Проверка работы "userReducer"', () => {
           type: registerUserThunk.rejected.type,
           error: { message: 'error register user' }
         }
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.isAuthenticated).toBeFalsy();
         expect(state.loginUserRequest).toBeFalsy();
         expect(state.error).toBe(action.error.message);
@@ -115,7 +115,7 @@ describe('Проверка работы "userReducer"', () => {
           type: registerUserThunk.fulfilled.type,
           payload: { user: registerMockData }
         }
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.isAuthenticated).toBeTruthy();
         expect(state.loginUserRequest).toBeFalsy();
         expect(state.user).toEqual(action.payload);
@@ -124,7 +124,7 @@ describe('Проверка работы "userReducer"', () => {
 
     test('Тест вызова "logoutUserThunk" с состоянием "pending"', () => {
       const action = { type: logoutUserThunk.pending.type };
-      const state = userReducer(initialState, action);
+      const state = userReducer({...initialState}, action);
       expect(state.user).toBeNull();
       expect(state.loginUserRequest).toBeFalsy();
       expect(state.isAuthenticated).toBeFalsy();
@@ -133,7 +133,7 @@ describe('Проверка работы "userReducer"', () => {
     describe('Тест вызова "getUserThunk"', () => {
       test('Тест вызова "getUserThunk" с состоянием "pending"', () => {
         const action = { type: getUserThunk.pending.type };
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.loginUserRequest).toBeTruthy();
       });
 
@@ -142,7 +142,7 @@ describe('Проверка работы "userReducer"', () => {
           type: getUserThunk.rejected.type,
           error: { message: 'error getting user' }
         }
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.user).toBeNull();
         expect(state.loginUserRequest).toBeFalsy();
         expect(state.error).toBe(action.error.message);
@@ -153,7 +153,7 @@ describe('Проверка работы "userReducer"', () => {
           type: getUserThunk.fulfilled.type,
           payload: { user: userMockData }
         }
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.user).toEqual(action.payload.user);
         expect(state.loginUserRequest).toBeFalsy();
         expect(state.isAuthenticated).toBeTruthy();
@@ -163,7 +163,7 @@ describe('Проверка работы "userReducer"', () => {
     describe('Тест вызова "updateUserThunk"', () => {
       test('Тест вызова "updateUserThunk" с состоянием "pending"', () => {
         const action = { type: updateUserThunk.pending.type };
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.loginUserRequest).toBeTruthy();
       });
 
@@ -172,7 +172,7 @@ describe('Проверка работы "userReducer"', () => {
           type: updateUserThunk.rejected.type,
           error: { message: 'error updating user' }
         }
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.loginUserRequest).toBeFalsy();
         expect(state.error).toBe(action.error.message);
       });
@@ -182,7 +182,7 @@ describe('Проверка работы "userReducer"', () => {
           type: updateUserThunk.fulfilled.type,
           payload: { user: userMockData }
         }
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.user).toEqual(action.payload.user);
         expect(state.loginUserRequest).toBeFalsy();
         expect(state.isAuthenticated).toBeTruthy();
@@ -192,7 +192,7 @@ describe('Проверка работы "userReducer"', () => {
     describe('Тест вызова "getOrdersThunk"', () => {
       test('Тест вызова "getOrdersThunk" с состоянием "pending"', () => {
         const action = { type: getOrdersThunk.pending.type };
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.ordersRequest).toBeTruthy();
       });
 
@@ -201,7 +201,7 @@ describe('Проверка работы "userReducer"', () => {
           type: getOrdersThunk.rejected.type,
           error: { message: 'error getting orders' }
         }
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.ordersRequest).toBeFalsy();
         expect(state.error).toBe(action.error.message);
       });
@@ -211,7 +211,7 @@ describe('Проверка работы "userReducer"', () => {
           type: getOrdersThunk.fulfilled.type,
           payload: { orders: ordersMockData }
         }
-        const state = userReducer(initialState, action);
+        const state = userReducer({...initialState}, action);
         expect(state.orders).toEqual(action.payload);
         expect(state.ordersRequest).toBeFalsy();
       });
@@ -224,6 +224,6 @@ describe('Проверка работы "userReducer"', () => {
       error: 'Пользователь не существует'
     }
     const state = userReducer(expectedResult, clearErrors());
-    expect(state).toEqual(initialState);
+    expect(state).toEqual({...initialState});
   });
 });

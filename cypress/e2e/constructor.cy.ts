@@ -1,7 +1,6 @@
 import * as userData from '../fixtures/user.json';
 import * as orders from '../fixtures/orders.json';
 
-const baseUrl = Cypress.config('baseUrl');
 const apiUrl = Cypress.env('BURGER_API_URL');
 const checkModalIsOpen = (data: string) => {
   cy.get(`[data-test="${data}"]`).click();
