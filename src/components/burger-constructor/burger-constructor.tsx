@@ -35,6 +35,12 @@ export const BurgerConstructor: FC = () => {
     ];
     dispatch(orderBurgerThunk(orderData));
   };
+  const buttonDisabled = useMemo(() => {
+    const { bun, ingredients } = constructorItems;
+    if (!bun || !ingredients.length) {
+      return true;
+    }
+  }, [constructorItems]);
   const closeOrderModal = () => {
     navigate('/', { replace: true });
     dispatch(clearOrder());
@@ -59,6 +65,7 @@ export const BurgerConstructor: FC = () => {
       orderModalData={orderModalData}
       onOrderClick={onOrderClick}
       closeOrderModal={closeOrderModal}
+      disableButton={buttonDisabled || false}
     />
   );
 };

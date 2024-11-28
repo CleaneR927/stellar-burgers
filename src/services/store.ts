@@ -4,18 +4,18 @@ import {
   useDispatch as dispatchHook,
   useSelector as selectorHook
 } from 'react-redux';
-import feeds from './feeds/feedsSlice';
-import ingredients from './ingredients/ingredientsSlice';
-import order from './order/orderSlice';
-import burgerConstructor from './burgerConstructor/burgerConstructorSlice';
-import userData from './userData/userDataSlice';
+import feedsReducer from './feeds/feedsSlice';
+import ingredientsReducer from './ingredients/ingredientsSlice';
+import orderReducer from './order/orderSlice';
+import burgerConstructorReducer from './burgerConstructor/burgerConstructorSlice';
+import userDataReducer from './userData/userDataSlice';
 
 export const rootReducer = combineReducers({
-  burgerConstructor,
-  feeds,
-  ingredients,
-  order,
-  userData
+  burgerConstructor: burgerConstructorReducer,
+  feeds: feedsReducer,
+  ingredients: ingredientsReducer,
+  order: orderReducer,
+  userData: userDataReducer
 });
 
 const store = configureStore({
